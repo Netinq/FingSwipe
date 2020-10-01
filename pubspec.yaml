@@ -1,0 +1,47 @@
+name: fingSwipeV2
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+2
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.12.2
+  flutter_animation_progress_bar: ^1.0.5
+
+  cupertino_icons: ^1.0.0
+  swipedetector: ^1.2.0
+  audioplayer: ^0.8.1
+  provider: ^4.3.2+2
+  line_icons: ^0.2.0
+  simple_gesture_detector: ^0.1.4
+  flutter_svg: ^0.19.0
+  flutter_launcher_icons: ^0.8.0
+  shared_preferences: ^0.5.11
+  audioplayers: ^0.16.1
+  intl: ^0.16.1
+  country_icons: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  # to update, run:
+  # flutter pub run flutter_launcher_icons:main
+  android: true
+  ios: true
+  image_path: "assets/logo_app_v2.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/music/background.mp3
+

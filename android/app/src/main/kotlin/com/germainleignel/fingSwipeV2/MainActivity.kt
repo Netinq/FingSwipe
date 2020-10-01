@@ -1,0 +1,6 @@
+package com.germainleignel.fingSwipeV2
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
