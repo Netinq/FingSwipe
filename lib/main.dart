@@ -1,15 +1,13 @@
 
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:fingSwipeV2/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/end_game_page.dart';
-import 'pages/game_page.dart';
+import 'pages/game_page_v2.dart';
 import 'pages/leaderboard_page.dart';
 import 'pages/menu_page.dart';
 import 'providers/game_provider.dart';
+import 'providers/language_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,11 +24,11 @@ void main() async {
       child: MaterialApp(
         routes: {
           'menu':  (context) => MenuPage(),
-          'normalGame': (context) => GamePage(),
+          'normalGame': (context) => GamePageV2(),
           'normalEnd': (context) => NormalEnd(),
           'leaderboard': (context) => LeaderboardPage(),
         },
-        home: MenuPage(),
+        initialRoute: 'normalGame',
       ),
     ),
   );

@@ -10,7 +10,7 @@ class DisplayedScore extends StatelessWidget {
 
   const DisplayedScore({Key key, this.score, this.scoreType, this.color}) : super(key: key);
 
-  static final LocalScore localScore = LocalScore();
+  static final LocalStorage localStorage = LocalStorage();
 
   @override
   Widget build(BuildContext context) {

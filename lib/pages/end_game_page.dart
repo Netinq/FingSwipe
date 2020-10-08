@@ -16,7 +16,7 @@ class NormalEnd extends StatefulWidget {
 }
 
 class _NormalEndState extends State<NormalEnd> {
-  LocalScore localScore = LocalScore();
+  LocalStorage localStorage = LocalStorage();
   Score score = Score();
 
   @override
@@ -32,7 +32,7 @@ class _NormalEndState extends State<NormalEnd> {
     final language = Provider.of<LanguageProvider>(context);
 
     if (stored == false) {
-      localScore.storeToCache(game.score);
+      localStorage.storeToCache(game.score);
       setState(() {
         stored = true;
       });
@@ -56,7 +56,7 @@ class _NormalEndState extends State<NormalEnd> {
             children: [
 
               FutureBuilder<int>(
-                future: localScore.getHighScore(),
+                future: localStorage.getHighScore(),
                 builder: (context, snapshot) {
                   return DisplayedScore(
                     scoreType: language.translateToFrench
