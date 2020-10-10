@@ -39,11 +39,11 @@ class Game with ChangeNotifier {
   int direction_word = 0;
   int direction_previous = 0;
 
-  Color green = Color(0xff62C980);
-  Color black = Colors.black;
+  static const Color green = Color(0xff33FF6E); // was previously Color(0xff62C980)
+  static const Color white = Color(0xffEEEEEE);
 
-  Color color_arrow = Colors.black;
-  Color color_word = Colors.black;
+  Color color_arrow = white;
+  Color color_word = white;
   
   Duration time = Duration(milliseconds: 2000);
 
@@ -73,12 +73,12 @@ class Game with ChangeNotifier {
 
       switch (randomColor()) {
         case 0:
-          this.color_arrow = this.green;
-          this.color_word = this.black;
+          this.color_arrow = green;
+          this.color_word = white;
           break;
         case 1:
-          this.color_arrow = this.black;
-          this.color_word = this.green;
+          this.color_arrow = white;
+          this.color_word = green;
           break;
       }
 
@@ -103,12 +103,12 @@ class Game with ChangeNotifier {
 
       switch (randomColor()) {
         case 0:
-          this.color_arrow = this.green;
-          this.color_word = this.black;
+          this.color_arrow = green;
+          this.color_word = white;
           break;
         case 1:
-          this.color_arrow = this.black;
-          this.color_word = this.green;
+          this.color_arrow = white;
+          this.color_word = green;
           break;
       }
 

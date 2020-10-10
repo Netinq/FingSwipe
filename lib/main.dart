@@ -28,7 +28,7 @@ void main() async {
           'normalEnd': (context) => NormalEnd(),
           'leaderboard': (context) => LeaderboardPage(),
         },
-        initialRoute: 'normalGame',
+        home: MenuPage(),
       ),
     ),
   );

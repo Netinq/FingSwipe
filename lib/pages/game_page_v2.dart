@@ -1,5 +1,7 @@
 import 'package:fingSwipeV2/providers/game_provider.dart';
 import 'package:fingSwipeV2/providers/language_provider.dart';
+import 'package:fingSwipeV2/widgets/game_widgets/indications.dart';
+import 'package:fingSwipeV2/widgets/game_widgets/score_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
@@ -12,6 +14,11 @@ class GamePageV2 extends StatefulWidget {
 class _GamePageV2State extends State<GamePageV2>
     with SingleTickerProviderStateMixin {
   String currentIndication = "Arrow";
+
+  AnimationController timerAnimationController;
+  double target = 0;
+
+  bool run = true;
 
   String translateMode(String swipeMode, bool needTranslate) {
     if (needTranslate) {
@@ -26,6 +33,30 @@ class _GamePageV2State extends State<GamePageV2>
   }
 
   @override
+  void initState() {
+    timerAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+      lowerBound: 0,
+      upperBound: 300,
+      value: target,
+    )..stop();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timerAnimationController.dispose();
+  }
+
+  @override
+  void deactivate() {
+    this.run = false;
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final game = Provider.of<Game>(context);
     final language = Provider.of<LanguageProvider>(context);
@@ -33,12 +64,13 @@ class _GamePageV2State extends State<GamePageV2>
     if (!game.run && game.engine) {
       game.resetEngine();
       Future.microtask(
-        () => Navigator.of(context)
+            () => Navigator.of(context)
             .pushNamedAndRemoveUntil('normalEnd', (route) => false),
       );
     } else if (!game.run && !game.engine) {
       game.initialize();
     }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -69,6 +101,7 @@ class _GamePageV2State extends State<GamePageV2>
           }
         },
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RichText(
               textAlign: TextAlign.center,
@@ -79,12 +112,17 @@ class _GamePageV2State extends State<GamePageV2>
                       style:
                           TextStyle(fontSize: 40, fontWeight: FontWeight.w500)),
                   TextSpan(
-                      text: currentIndication,
+                      text: game.getSwipeMode(),
                       style:
-                          TextStyle(fontSize: 55, fontWeight: FontWeight.w900))
+                          TextStyle(fontSize: 70, fontWeight: FontWeight.w900))
                 ],
               ),
-            )
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+            Indications(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+            ScoreWidget()
+
           ],
         ),
       ),
