@@ -182,7 +182,9 @@ class MenuPage extends StatelessWidget {
                         ),
                         FlatButton(
                           onPressed: () {
-                            // @TODO
+                            language.translateToFrench
+                                ? language.toEnglish()
+                                : language.toFrench();
                           },
                           child: Image.asset(
                             'assets/lang.png',

@@ -1,10 +1,12 @@
-import 'package:fingSwipeV2/providers/game_provider.dart';
-import 'package:fingSwipeV2/providers/language_provider.dart';
-import 'package:fingSwipeV2/widgets/game_widgets/indications.dart';
-import 'package:fingSwipeV2/widgets/game_widgets/score_widget.dart';
+import 'package:fingSwipeV2/models/local_cache_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
+
+import '../providers/game_provider.dart';
+import '../providers/language_provider.dart';
+import '../widgets/game_widgets/indications.dart';
+import '../widgets/game_widgets/score_widget.dart';
 
 class GamePageV2 extends StatefulWidget {
   @override
@@ -63,6 +65,8 @@ class _GamePageV2State extends State<GamePageV2>
 
     if (!game.run && game.engine) {
       game.resetEngine();
+      Future.sync(() => LocalStorage().storeToCache(game.score));
+      // LocalStorage().storeToCache(game.score);
       Future.microtask(
         () => Navigator.of(context)
             .pushNamedAndRemoveUntil('normalEnd', (route) => false),
