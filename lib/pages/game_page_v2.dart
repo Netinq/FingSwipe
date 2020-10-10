@@ -25,7 +25,7 @@ class _GamePageV2State extends State<GamePageV2>
       if (swipeMode == 'Arrows !') {
         return 'Flèches !';
       } else if (swipeMode == 'Text !') {
-        return 'Texte !';
+        return 'Mots !';
       }
     }
 
@@ -64,66 +64,82 @@ class _GamePageV2State extends State<GamePageV2>
     if (!game.run && game.engine) {
       game.resetEngine();
       Future.microtask(
-            () => Navigator.of(context)
+        () => Navigator.of(context)
             .pushNamedAndRemoveUntil('normalEnd', (route) => false),
       );
     } else if (!game.run && !game.engine) {
       game.initialize();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/background.png'),
-          fit: BoxFit.cover,
+    return Material(
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: SimpleGestureDetector(
-        swipeConfig: SimpleSwipeConfig(
-          horizontalThreshold: 0,
-          verticalThreshold: 0,
-          swipeDetectionBehavior: SwipeDetectionBehavior.singular,
-        ),
-        onHorizontalSwipe: (SwipeDirection direction) {
-          if (direction == SwipeDirection.right) {
-            game.check(1);
-          }
-          if (direction == SwipeDirection.left) {
-            game.check(3);
-          }
-        },
-        onVerticalSwipe: (SwipeDirection direction) {
-          if (direction == SwipeDirection.up) {
-            game.check(0);
-          }
-          if (direction == SwipeDirection.down) {
-            game.check(2);
-          }
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: "Follow the\n",
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.w500)),
-                  TextSpan(
-                      text: game.getSwipeMode(),
-                      style:
-                          TextStyle(fontSize: 70, fontWeight: FontWeight.w900))
-                ],
-              ),
+        child: SafeArea(
+          child: SimpleGestureDetector(
+            swipeConfig: SimpleSwipeConfig(
+              horizontalThreshold: 0,
+              verticalThreshold: 0,
+              swipeDetectionBehavior: SwipeDetectionBehavior.singular,
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
-            Indications(),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
-            ScoreWidget()
-
-          ],
+            onHorizontalSwipe: (SwipeDirection direction) {
+              if (direction == SwipeDirection.right) {
+                game.check(1);
+              }
+              if (direction == SwipeDirection.left) {
+                game.check(3);
+              }
+            },
+            onVerticalSwipe: (SwipeDirection direction) {
+              if (direction == SwipeDirection.up) {
+                game.check(0);
+              }
+              if (direction == SwipeDirection.down) {
+                game.check(2);
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      language.translateToFrench ? "Suis les" : "Follow the",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFF4E6F7),
+                      ),
+                    ),
+                    Text(
+                      translateMode(
+                          game.getSwipeMode(), language.translateToFrench),
+                      style: TextStyle(
+                        fontSize: 70,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFFF4E6F7),
+                      ),
+                    ),
+                  ],
+                ),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.03,
+                // ),
+                Indications(),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.05,
+                // ),
+                ScoreWidget(),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.05,
+                // ),
+              ],
+            ),
+          ),
         ),
       ),
     );

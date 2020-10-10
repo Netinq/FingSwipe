@@ -2,7 +2,7 @@ import 'package:fingSwipeV2/models/local_cache_provider.dart';
 import 'package:flutter/foundation.dart';
 
 class LanguageProvider with ChangeNotifier {
-  bool translateToFrench = false;
+  bool translateToFrench = true;
   LocalStorage localStorage = LocalStorage();
 
   Future<void> getStoredLanguage() async {

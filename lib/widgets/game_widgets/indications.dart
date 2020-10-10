@@ -123,7 +123,7 @@ class _IndicationsState extends State<Indications>
                   Text(
                     translateText(
                         game.getWordDirection(), language.translateToFrench),
-                    style: TextStyle(fontSize: 55, color: game.getWordColor()),
+                    style: TextStyle(fontSize: 55, color: game.getWordColor(), fontWeight: FontWeight.w800),
                   ),
                 ],
               ),
