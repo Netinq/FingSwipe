@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
+import 'package:fingSwipeV2/widgets/end_game/add_leaderboard_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +52,7 @@ class NormalEndV2 extends StatelessWidget {
                         child: FutureBuilder<int>(
                             future: localStorage.getHighScore(),
                             builder: (context, snapshot) {
-                              return Text(
+                              return AutoSizeText(
                                 snapshot.data.toString(),
                                 style: TextStyle(
                                   color: Color(0xFFFEEEEEE),
@@ -116,7 +118,12 @@ class NormalEndV2 extends StatelessWidget {
                   'assets/trophy.png',
                   height: 25,
                 ),
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    child: AddToLeaderboardModalSheet()
+                  );
+                },
                 text: Text(
                   language.translateToFrench ? "CLASSEMENT" : "LEADERBOARD",
                   textAlign: TextAlign.center,

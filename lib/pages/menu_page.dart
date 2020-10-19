@@ -1,5 +1,6 @@
 import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/language_provider.dart';
@@ -20,148 +21,146 @@ class MenuPage extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
-              // onTap: () {
-              //   Navigator.pushNamed(context, 'normalGame');
-              // },
-              children: [
-                Positioned(
-                  top: MediaQuery.of(context).size.height / 16,
-                  left: 50,
-                  child: Image.asset(
-                    "assets/title.png",
-                    width: MediaQuery.of(context).size.width - 100,
-                    fit: BoxFit.cover,
-                  ),
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                top: MediaQuery.of(context).size.height / 16,
+                left: 50,
+                child: Image.asset(
+                  "assets/title.png",
+                  width: MediaQuery.of(context).size.width - 100,
+                  fit: BoxFit.cover,
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
+              ),
+              Positioned(
+                bottom: 230,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CommonButton(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('normalGame');
-                        },
-                        text: Text(
-                          language.translateToFrench ? "Normale" : "Normal",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 25,
-                            color: Color(0xffffffff),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonButton(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('normalGame');
+                            },
+                            text: Text(
+                              language.translateToFrench ? "Normale" : "Normal",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 25,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                            icon: Image.asset(
+                              "assets/play.png",
+                              height: 35,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        icon: Image.asset(
-                          "assets/play.png",
-                          height: 35,
-                          fit: BoxFit.cover,
+                          SizedBox(height: 50),
+                          // CommonButton(
+                          //   onTap: () {
+                          //     Navigator.of(context).pushNamed('leaderboard');
+                          //   },
+                          //   text: Text(
+                          //     language.translateToFrench ? "Défis" : "Challenge",
+                          //     style: TextStyle(
+                          //       fontWeight: FontWeight.w400,
+                          //       fontSize: 25,
+                          //       color: Color(0xffffffff),
+                          //     ),
+                          //   ),
+                          //   icon: Image.asset(
+                          //     "assets/play.png",
+                          //     height: 35,
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          // ),
+                          CommonButton(
+                            icon: Image.asset(
+                              "assets/trophy.png",
+                              height: 25,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.of(context).pushNamed('leaderboard');
+                            },
+                            text: Text(
+                              language.translateToFrench
+                                  ? "Classement"
+                                  : "Leaderboard",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 25,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 25,
+                bottom: 25,
+                child: Container(
+                  height: 65,
+                  width: MediaQuery.of(context).size.width - 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(150))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // @TODO
+                          Fluttertoast.showToast(msg: "Coming soon!");
+                        },
+                        child: Image.asset(
+                          'assets/settings.png',
+                          height: 30,
                         ),
                       ),
-                      SizedBox(height: 50),
-                      CommonButton(
+                      GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushNamed('leaderboard');
+                          // @TODO
+                          Fluttertoast.showToast(msg: "Coming soon!");
                         },
-                        text: Text(
-                          language.translateToFrench ? "Défis" : "Challenge",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 25,
-                            color: Color(0xffffffff),
-                          ),
+                        child: Image.asset(
+                          'assets/about.png',
+                          height: 30,
                         ),
-                        icon: Image.asset(
-                          "assets/play.png",
-                          height: 35,
-                          fit: BoxFit.cover,
+                      ),
+                      GestureDetector(
+                        onLongPress: () {
+                          Fluttertoast.showToast(
+                            msg: language.translateToFrench
+                                ? "Change la langue"
+                                : "Change the language",
+                          );
+                        },
+                        onTap: () {
+                          language.translateToFrench
+                              ? language.toEnglish()
+                              : language.toFrench();
+                        },
+                        child: Image.asset(
+                          'assets/lang.png',
+                          height: 30,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: 125,
-                  left: 15,
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('leaderboard');
-                    },
-                    child: Container(
-                      height: 65,
-                      width: MediaQuery.of(context).size.width - 60,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(150)),
-                          image: DecorationImage(
-                            image: AssetImage('assets/btn3.png'),
-                            fit: BoxFit.cover,
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 35, right: 35),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              language.translateToFrench
-                                  ? "Classement"
-                                  : "Leaderboard",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 25,
-                                  color: Color(0xffffffff)),
-                            ),
-                            Image.asset("assets/trophy.png",
-                                height: 25, fit: BoxFit.cover),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 25,
-                  bottom: 25,
-                  child: Container(
-                    height: 65,
-                    width: MediaQuery.of(context).size.width - 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(150))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FlatButton(
-                          onPressed: () {
-                            // @TODO
-                          },
-                          child: Image.asset(
-                            'assets/settings.png',
-                            height: 30,
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            // @TODO
-                          },
-                          child: Image.asset(
-                            'assets/about.png',
-                            height: 30,
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            language.translateToFrench
-                                ? language.toEnglish()
-                                : language.toFrench();
-                          },
-                          child: Image.asset(
-                            'assets/lang.png',
-                            height: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
+              ),
+            ],
+          ),
         ),
       ],
     );
