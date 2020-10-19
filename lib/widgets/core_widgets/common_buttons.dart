@@ -1,6 +1,4 @@
-import 'package:fingSwipeV2/providers/language_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CommonButton extends StatelessWidget {
   final void Function() onTap;
@@ -16,10 +14,8 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final language = Provider.of<LanguageProvider>(context);
     return FlatButton(
       minWidth: MediaQuery.of(context).size.width * 0.65,
-      height: 100,
       onPressed: onTap,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(80.0),
