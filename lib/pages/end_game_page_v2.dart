@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
-import 'package:fingSwipeV2/widgets/end_game/add_leaderboard_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/local_cache_provider.dart';
 import '../providers/game_provider.dart';
 import '../providers/language_provider.dart';
+import '../widgets/core_widgets/common_buttons.dart';
+import '../widgets/end_game/add_leaderboard_sheet.dart';
 
 class NormalEndV2 extends StatelessWidget {
   final LocalStorage localStorage = LocalStorage();

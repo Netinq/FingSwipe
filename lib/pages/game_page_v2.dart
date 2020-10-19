@@ -1,8 +1,8 @@
-import 'package:fingSwipeV2/models/local_cache_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
+import '../models/local_cache_provider.dart';
 import '../providers/game_provider.dart';
 import '../providers/language_provider.dart';
 import '../widgets/game_widgets/indications.dart';

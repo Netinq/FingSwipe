@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/end_game_page.dart';
 import 'pages/end_game_page_v2.dart';
 import 'pages/game_page_v2.dart';
 import 'pages/leaderboard_page.dart';

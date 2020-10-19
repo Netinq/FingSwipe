@@ -1,6 +1,7 @@
-import 'package:fingSwipeV2/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/language_provider.dart';
 
 class AddToLeaderboardModalSheet extends StatefulWidget {
   @override

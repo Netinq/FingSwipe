@@ -1,6 +1,4 @@
-import 'dart:ffi';
 
-import 'package:fingSwipeV2/main.dart';
 import 'package:flutter/material.dart';
 
 class MenuButtons extends StatelessWidget {

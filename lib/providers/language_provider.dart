@@ -1,5 +1,6 @@
-import 'package:fingSwipeV2/models/local_cache_provider.dart';
 import 'package:flutter/foundation.dart';
+
+import '../models/local_cache_provider.dart';
 
 class LanguageProvider with ChangeNotifier {
   bool translateToFrench = true;

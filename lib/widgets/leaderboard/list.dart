@@ -1,6 +1,6 @@
-import 'package:fingSwipeV2/models/leaderboard_score.dart';
-import 'package:fingSwipeV2/widgets/leaderboard/score_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'score_widget.dart';
 
 class LeaderboardList extends StatelessWidget {
   final List<ScoreWidget> scores;

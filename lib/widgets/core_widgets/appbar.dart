@@ -1,8 +1,9 @@
-import 'package:fingSwipeV2/providers/language_provider.dart';
-import 'package:fingSwipeV2/widgets/menu_widgets/language_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/language_provider.dart';
+import '../menu_widgets/language_button.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   CustomAppBar({

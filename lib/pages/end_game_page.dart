@@ -1,11 +1,10 @@
-import 'package:fingSwipeV2/main.dart';
-import 'package:fingSwipeV2/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/local_cache_provider.dart';
 import '../models/score_provider.dart';
 import '../providers/game_provider.dart';
+import '../providers/language_provider.dart';
 import '../widgets/core_widgets/appbar.dart';
 import '../widgets/end_game/eng_game_buttons.dart';
 import '../widgets/end_game/score.dart';

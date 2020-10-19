@@ -1,6 +1,7 @@
-import 'package:fingSwipeV2/providers/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/game_provider.dart';
 
 
 class ScoreWidget extends StatefulWidget {

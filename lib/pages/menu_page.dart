@@ -1,9 +1,9 @@
-import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/language_provider.dart';
+import '../widgets/core_widgets/common_buttons.dart';
 
 class MenuPage extends StatelessWidget {
   @override
