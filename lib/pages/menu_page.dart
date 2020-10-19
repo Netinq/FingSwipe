@@ -1,3 +1,4 @@
+import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,81 +33,46 @@ class MenuPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Positioned(
-                  bottom: 250,
-                  left: 15,
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FlatButton(
-                        onPressed: () {
+                      CommonButton(
+                        onTap: () {
                           Navigator.of(context).pushNamed('normalGame');
                         },
-                        child: Container(
-                          height: 75,
-                          width: MediaQuery.of(context).size.width - 60,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(150)),
-                              image: DecorationImage(
-                                image: AssetImage('assets/btn1.png'),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 35, right: 35),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  language.translateToFrench
-                                      ? "Normale"
-                                      : "Normal",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 25,
-                                      color: Color(0xffffffff)),
-                                ),
-                                Image.asset("assets/play.png",
-                                    height: 35, fit: BoxFit.cover),
-                              ],
-                            ),
+                        text: Text(
+                          language.translateToFrench ? "Normale" : "Normal",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 25,
+                            color: Color(0xffffffff),
                           ),
                         ),
+                        icon: Image.asset(
+                          "assets/play.png",
+                          height: 35,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      FlatButton(
-                        onPressed: () {
+                      SizedBox(height: 50),
+                      CommonButton(
+                        onTap: () {
                           Navigator.of(context).pushNamed('leaderboard');
                         },
-                        child: Container(
-                          height: 75,
-                          width: MediaQuery.of(context).size.width - 60,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(150)),
-                              image: DecorationImage(
-                                image: AssetImage('assets/btn2.png'),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 35, right: 35),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  language.translateToFrench
-                                      ? "Défis"
-                                      : "Challenge",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 25,
-                                      color: Color(0xffffffff)),
-                                ),
-                                Image.asset("assets/play.png",
-                                    height: 35, fit: BoxFit.cover),
-                              ],
-                            ),
+                        text: Text(
+                          language.translateToFrench ? "Défis" : "Challenge",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 25,
+                            color: Color(0xffffffff),
                           ),
+                        ),
+                        icon: Image.asset(
+                          "assets/play.png",
+                          height: 35,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:fingSwipeV2/widgets/core_widgets/common_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -90,79 +91,38 @@ class NormalEndV2 extends StatelessWidget {
                   ),
                 ),
               ),
-              RaisedButton(
-                elevation: 3,
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil('menu', (route) => false);
+              CommonButton(
+                onTap: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    'menu',
+                    (route) => false,
+                  );
                 },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(80.0),
+                text: Text(
+                  language.translateToFrench ? "REJOUER" : "PLAY AGAIN",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFFBC6FC2),
-                        Color(0xFF8E95F1),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          language.translateToFrench ? "REJOUER" : "PLAY AGAIN",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        Image.asset('assets/play.png', height: 25,),
-                      ],
-                    ),
-                  ),
+                icon: Image.asset(
+                  'assets/play.png',
+                  height: 25,
                 ),
               ),
-              RaisedButton(
-                elevation: 3,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(80.0),
+              CommonButton(
+                icon: Image.asset(
+                  'assets/trophy.png',
+                  height: 25,
                 ),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFFBC6FC2),
-                        Color(0xFF8E95F1),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          language.translateToFrench ? "AJOUTER AU CLASSEMENT" : "ADD TO LEADERBOARD",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        Image.asset('assets/trophy.png', height: 25,),
-                      ],
-                    ),
+                onTap: () {},
+                text: Text(
+                  language.translateToFrench ? "CLASSEMENT" : "LEADERBOARD",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
               ),
