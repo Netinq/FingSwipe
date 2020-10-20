@@ -125,7 +125,7 @@ class NormalEnd extends StatelessWidget {
                   );
                 },
                 text: Text(
-                  language.translateToFrench ? "CLASSEMENT" : "LEADERBOARD",
+                  language.translateToFrench ? "SAUVEGARDER" : "SAVE",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,

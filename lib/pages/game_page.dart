@@ -66,7 +66,6 @@ class _GamePageState extends State<GamePage>
     if (!game.run && game.engine) {
       game.resetEngine();
       Future.sync(() => LocalStorage().storeToCache(game.score));
-      // LocalStorage().storeToCache(game.score);
       Future.microtask(
         () => Navigator.of(context)
             .pushNamedAndRemoveUntil('normalEnd', (route) => false),

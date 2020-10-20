@@ -1,3 +1,5 @@
+import 'package:fingSwipeV2/models/score_api.dart';
+import 'package:fingSwipeV2/providers/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,8 @@ class _AddToLeaderboardModalSheetState
     extends State<AddToLeaderboardModalSheet> {
   TextEditingController _controller;
 
+  final scoreApi = Score();
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +26,7 @@ class _AddToLeaderboardModalSheetState
   @override
   Widget build(BuildContext context) {
     final language = Provider.of<LanguageProvider>(context);
+    final game = Provider.of<Game>(context);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -38,6 +43,7 @@ class _AddToLeaderboardModalSheetState
           child: Text("OK"),
           onPressed: () {
             print(_controller.value);
+            scoreApi.store(_controller.text, game.score);
             Navigator.pop(context);
           },
         ),

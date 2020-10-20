@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import '../models/local_storage.dart';
 
 class LanguageProvider with ChangeNotifier {
-  bool translateToFrench = true;
+  bool translateToFrench = false;
+
   LocalStorage localStorage = LocalStorage();
 
   Future<void> getStoredLanguage() async {
@@ -20,15 +21,15 @@ class LanguageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toFrench() {
+  void toFrench() async {
     translateToFrench = true;
-    localStorage.storeLanguagePrefs('fr');
     notifyListeners();
+    await localStorage.storeLanguagePrefs('fr');
   }
 
-  void toEnglish() {
+  void toEnglish() async {
     translateToFrench = false;
-    localStorage.storeLanguagePrefs('en');
     notifyListeners();
+    await localStorage.storeLanguagePrefs('en');
   }
 }

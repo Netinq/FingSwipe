@@ -9,6 +9,8 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final language = Provider.of<LanguageProvider>(context);
+    
+    language.getStoredLanguage();
 
     return Stack(
       children: <Widget>[
@@ -48,7 +50,7 @@ class MenuPage extends StatelessWidget {
                               Navigator.of(context).pushNamed('normalGame');
                             },
                             text: Text(
-                              language.translateToFrench ? "Normale" : "Normal",
+                              language.translateToFrench ? "JOUER" : "PLAY",
                               style: TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: 25,
@@ -91,8 +93,8 @@ class MenuPage extends StatelessWidget {
                             },
                             text: Text(
                               language.translateToFrench
-                                  ? "Classement"
-                                  : "Leaderboard",
+                                  ? "CLASSEMENT"
+                                  : "LEADERBOARD",
                               style: TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: 25,

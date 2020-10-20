@@ -1,16 +1,20 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/all_scores.dart';
 import 'pages/end_game_page.dart';
 import 'pages/game_page.dart';
-import 'pages/leaderboard_page_v2.dart';
+import 'pages/leaderboard_page.dart';
 import 'pages/menu_page.dart';
 import 'providers/game_provider.dart';
 import 'providers/language_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setEnabledSystemUIOverlays ([]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
     MultiProvider(
       providers: [
@@ -26,9 +30,10 @@ void main() async {
           'menu':  (context) => MenuPage(),
           'normalGame': (context) => GamePage(),
           'normalEnd': (context) => NormalEnd(),
-          'leaderboard': (context) => LeaderboardPageV2(),
+          'leaderboard': (context) => LeaderboardPage(),
+          'allScores': (context) => ScoresPage(),
         },
-        home: MenuPage(),
+        initialRoute: 'menu',
       ),
     ),
   );

@@ -39,7 +39,7 @@ class Game with ChangeNotifier {
   int direction_word = 0;
   int direction_previous = 0;
 
-  static const Color green = Color(0xff33FF6E); // was previously Color(0xff62C980)
+  static const Color green = Color(0xFF65FF90); // was previously Color(0xff62C980)
   static const Color white = Color(0xffEEEEEE);
 
   Color color_arrow = white;
