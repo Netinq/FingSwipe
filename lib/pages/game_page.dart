@@ -2,27 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
+import '../models/local_cache_provider.dart';
 import '../providers/game_provider.dart';
 import '../providers/language_provider.dart';
-import '../widgets/core_widgets/appbar.dart';
 import '../widgets/game_widgets/indications.dart';
+import '../widgets/game_widgets/score_widget.dart';
 
 class GamePage extends StatefulWidget {
   @override
   _GamePageState createState() => _GamePageState();
 }
 
-class _GamePageState extends State<GamePage> {
+class _GamePageState extends State<GamePage>
+    with SingleTickerProviderStateMixin {
+  String currentIndication = "Arrow";
+
+  AnimationController timerAnimationController;
+  double target = 0;
+
+  bool run = true;
+
   String translateMode(String swipeMode, bool needTranslate) {
     if (needTranslate) {
       if (swipeMode == 'Arrows !') {
         return 'Flèches !';
       } else if (swipeMode == 'Text !') {
-        return 'Texte !';
+        return 'Mots !';
       }
     }
 
     return swipeMode;
+  }
+
+  @override
+  void initState() {
+    timerAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+      lowerBound: 0,
+      upperBound: 300,
+      value: target,
+    )..stop();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timerAnimationController.dispose();
+  }
+
+  @override
+  void deactivate() {
+    this.run = false;
+    super.deactivate();
   }
 
   @override
@@ -32,6 +65,8 @@ class _GamePageState extends State<GamePage> {
 
     if (!game.run && game.engine) {
       game.resetEngine();
+      Future.sync(() => LocalStorage().storeToCache(game.score));
+      // LocalStorage().storeToCache(game.score);
       Future.microtask(
         () => Navigator.of(context)
             .pushNamedAndRemoveUntil('normalEnd', (route) => false),
@@ -40,17 +75,15 @@ class _GamePageState extends State<GamePage> {
       game.initialize();
     }
 
-    return Stack(children: <Widget>[
-      Image.asset(
-        "assets/background.png",
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-      ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: CustomAppBar(),
-        body: SizedBox.expand(
+    return Material(
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
           child: SimpleGestureDetector(
             swipeConfig: SimpleSwipeConfig(
               horizontalThreshold: 0,
@@ -73,45 +106,46 @@ class _GamePageState extends State<GamePage> {
                 game.check(2);
               }
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      game.score.toString(),
-                      style: TextStyle(fontSize: 33),
+                      language.translateToFrench ? "Suis les" : "Follow the",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFF4E6F7),
+                      ),
                     ),
                     Text(
                       translateMode(
                           game.getSwipeMode(), language.translateToFrench),
-                      style:
-                          TextStyle(fontSize: 50, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                        fontSize: 70,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFFF4E6F7),
+                      ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      language.translateToFrench
-                          ? 'Glisse suivant les instructions'
-                          : "Swipe where indicated !",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Indications(),
                   ],
                 ),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.03,
+                // ),
+                Indications(),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.05,
+                // ),
+                ScoreWidget(),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.05,
+                // ),
               ],
             ),
           ),
         ),
-      )
-    ]);
+      ),
+    );
   }
 }

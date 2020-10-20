@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/end_game_page_v2.dart';
-import 'pages/game_page_v2.dart';
+import 'pages/end_game_page.dart';
+import 'pages/game_page.dart';
 import 'pages/leaderboard_page.dart';
 import 'pages/menu_page.dart';
 import 'providers/game_provider.dart';
@@ -24,8 +24,8 @@ void main() async {
       child: MaterialApp(
         routes: {
           'menu':  (context) => MenuPage(),
-          'normalGame': (context) => GamePageV2(),
-          'normalEnd': (context) => NormalEndV2(),
+          'normalGame': (context) => GamePage(),
+          'normalEnd': (context) => NormalEnd(),
           'leaderboard': (context) => LeaderboardPage(),
         },
         home: MenuPage(),

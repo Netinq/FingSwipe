@@ -1,155 +1,142 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/local_cache_provider.dart';
-import '../models/score_provider.dart';
 import '../providers/game_provider.dart';
 import '../providers/language_provider.dart';
-import '../widgets/core_widgets/appbar.dart';
-import '../widgets/end_game/eng_game_buttons.dart';
-import '../widgets/end_game/score.dart';
+import '../widgets/core_widgets/common_buttons.dart';
+import '../widgets/end_game/add_leaderboard_sheet.dart';
 
-class NormalEnd extends StatefulWidget {
-  @override
-  _NormalEndState createState() => _NormalEndState();
-}
-
-class _NormalEndState extends State<NormalEnd> {
-  LocalStorage localStorage = LocalStorage();
-  Score score = Score();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  bool stored = false;
-
+class NormalEnd extends StatelessWidget {
+  final LocalStorage localStorage = LocalStorage();
   @override
   Widget build(BuildContext context) {
-    var game = Provider.of<Game>(context);
     final language = Provider.of<LanguageProvider>(context);
-
-    if (stored == false) {
-      localStorage.storeToCache(game.score);
-      setState(() {
-        stored = true;
-      });
-    }
-
-    return Stack(children: <Widget>[
-      Image.asset(
-        "assets/background.png",
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-      ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-      appBar: CustomAppBar(),
-      body: SizedBox.expand(
-        child: Center(
+    final game = Provider.of<Game>(context);
+    return Material(
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
-              FutureBuilder<int>(
-                future: localStorage.getHighScore(),
-                builder: (context, snapshot) {
-                  return DisplayedScore(
-                    scoreType: language.translateToFrench
-                        ? 'MEILLEURS SCORE'
-                        : 'BEST SCORE',
-                    score: snapshot.data,
-                    color: Color(0xff6ec2bb),
-                  );
-                }
-              ),
-
-              DisplayedScore(
-                scoreType: 'SCORE',
-                score: game.score,
-                color: Color(0xff000000),
-              ),
-
               Container(
-                margin: EdgeInsets.only(top: 50.0, bottom: 25.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      language.translateToFrench ? "MON\nRECORD" : "MY\nRECORD",
+                      style: TextStyle(
+                          fontSize: 40,
+                          color: Color(0xFFEEEEEE),
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          width: 5,
+                          color: Color(0xFFEEEEEE),
+                        ),
+                      ),
+                      child: Center(
+                        child: FutureBuilder<int>(
+                            future: localStorage.getHighScore(),
+                            builder: (context, snapshot) {
+                              return AutoSizeText(
+                                snapshot.data.toString(),
+                                style: TextStyle(
+                                  color: Color(0xFFFEEEEEE),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              );
+                            }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Divider(
+                color: Color(0xFFF4E6F7),
+                thickness: 2,
+                indent: MediaQuery.of(context).size.width * 0.15,
+                endIndent: MediaQuery.of(context).size.width * 0.15,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    width: 5,
+                    color: Color(0xFFEEEEEE),
                   ),
-                  color: Color(0xFFEEEEEE),
-                  textColor: Color(0xFF0E0E0E),
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
-                  padding: EdgeInsets.only(
-                      bottom: 15.0, top: 15.0, left: 25.0, right: 25.0),
-                  splashColor: Color(0xFFEDEDED),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        TextEditingController nameController =
-                            TextEditingController();
-                        return AlertDialog(
-                          title: Text(
-                              language.translateToFrench ? 'Entrez votre pseudo:' :
-                              "Enter name:",),
-                          content: TextField(
-                            controller: nameController,
-                            autocorrect: true,
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              hintText: "Name",
-                            ),
-                            onSubmitted: (String newName) {
-                              score.store(nameController.text, game.score);
-                              Navigator.pop(context);
-                            },
-                          ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  score.store(nameController.text, game.score);
-                                  Navigator.pop(context);
-                                },
-                                child: Text(language.translateToFrench ? 'Partager' : 'Submit'),
-                              )
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: Text(
-                      language.translateToFrench
-                          ? "AJOUTER AU CLASSEMENT"
-                          : "ADD ON LEADERBOARD",
-                      style: TextStyle(fontSize: 18.0),
+                ),
+                child: Center(
+                  child: Text(
+                    game.score.toString(),
+                    style: TextStyle(
+                      color: Color(0xFFFEEEEEE),
+                      fontSize: 60,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                EndGameButtons(
-                  text: language.translateToFrench ? 'REJOUER' : 'PLAY AGAIN',
-                  route: 'normalGame',
-                  mode: 1,
+              ),
+              CommonButton(
+                onTap: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    'menu',
+                    (route) => false,
+                  );
+                },
+                text: Text(
+                  language.translateToFrench ? "REJOUER" : "PLAY AGAIN",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
-                EndGameButtons(
-                  text: language.translateToFrench
-                      ? 'MENU PRINCIPAL'
-                      : 'MAIN MENU',
-                  route: 'menu',
-                  mode: 2,
+                icon: Image.asset(
+                  'assets/play.png',
+                  height: 25,
                 ),
-                SizedBox(
-                  height: 20,
-                )
-              ],
-            ),
+              ),
+              CommonButton(
+                icon: Image.asset(
+                  'assets/trophy.png',
+                  height: 25,
+                ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    child: AddToLeaderboardModalSheet()
+                  );
+                },
+                text: Text(
+                  language.translateToFrench ? "CLASSEMENT" : "LEADERBOARD",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    ],
     );
   }
 }
