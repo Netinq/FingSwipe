@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/local_cache_provider.dart';
+import '../models/local_storage.dart';
 import '../providers/game_provider.dart';
 import '../providers/language_provider.dart';
 import '../widgets/core_widgets/common_buttons.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/local_cache_provider.dart';
+import '../../models/local_storage.dart';
 
 class DisplayedScore extends StatelessWidget {
 

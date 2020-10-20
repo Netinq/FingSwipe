@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/local_cache_provider.dart';
+import '../models/local_storage.dart';
 
 class LanguageProvider with ChangeNotifier {
   bool translateToFrench = true;

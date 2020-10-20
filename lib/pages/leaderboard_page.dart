@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/leaderboard_score.dart';
-import '../models/score_provider.dart';
+import '../models/score_api.dart';
 import '../widgets/core_widgets/appbar.dart';
 import '../widgets/leaderboard/score_widget.dart';
 

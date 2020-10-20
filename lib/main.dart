@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'pages/end_game_page.dart';
 import 'pages/game_page.dart';
-import 'pages/leaderboard_page.dart';
+import 'pages/leaderboard_page_v2.dart';
 import 'pages/menu_page.dart';
 import 'providers/game_provider.dart';
 import 'providers/language_provider.dart';
@@ -26,7 +26,7 @@ void main() async {
           'menu':  (context) => MenuPage(),
           'normalGame': (context) => GamePage(),
           'normalEnd': (context) => NormalEnd(),
-          'leaderboard': (context) => LeaderboardPage(),
+          'leaderboard': (context) => LeaderboardPageV2(),
         },
         home: MenuPage(),
       ),
