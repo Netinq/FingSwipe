@@ -11,9 +11,17 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'all_scores.dart';
 
 // ignore: must_be_immutable
-class LeaderboardPage extends StatelessWidget {
+class LeaderboardPage extends StatefulWidget {
+  @override
+  _LeaderboardPageState createState() => _LeaderboardPageState();
+}
+
+class _LeaderboardPageState extends State<LeaderboardPage> {
   final scores = Score();
+
   final localStorage = LocalStorage();
+
+  /// TODO: FIGURE OUT WHY THIS CALLS [scores.getAll()] 300 FUCKING TIMES!!!
 
   Future<Map<String, dynamic>> getLeaderboardData() async {
     final List<LeaderboardScore> scoresData = await scores.getAll();
@@ -83,7 +91,7 @@ class LeaderboardPage extends StatelessWidget {
         ),
         child: FutureBuilder<Map<String, dynamic>>(
           future: getLeaderboardData(),
-          builder: (context, snapshot) {
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               final Map<String, dynamic> data = snapshot.data;
               return SafeArea(
@@ -186,3 +194,4 @@ class LeaderboardPage extends StatelessWidget {
     );
   }
 }
+
